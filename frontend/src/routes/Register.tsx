@@ -10,7 +10,7 @@ import {
   Text,
   VStack,
 } from '@chakra-ui/react';
-import { AtSign, Lock } from 'lucide-react';
+import { AtSign, Lock, LockKeyhole } from 'lucide-react';
 import { Link as RouterLink, useNavigate } from 'react-router';
 
 export function Register() {
@@ -24,27 +24,41 @@ export function Register() {
         height={'100svh'}
         padding={{ base: '2em', md: '0' }}
       >
-        <VStack spacing={10}>
+        <VStack spacing={10} width={'30svw'}>
           <Text fontSize={'5xl'} color={'gray.600'} align={'center'}>
             Cadastrar
           </Text>
           <VStack spacing={2} width={'100%'}>
             <InputGroup>
-              <Input placeholder={'Email'} type={'email'} />
+              <Input
+                placeholder={'Email'}
+                type={'email'}
+                name={'email'}
+                autoComplete={'email'}
+              />
               <InputRightElement>
                 <AtSign color={'gray'} />
               </InputRightElement>
             </InputGroup>
             <InputGroup>
-              <Input placeholder={'Senha'} type={'password'} />
+              <Input
+                placeholder={'Senha'}
+                type={'password'}
+                name={'password'}
+              />
               <InputRightElement>
                 <Lock color={'gray'} />
               </InputRightElement>
             </InputGroup>
             <InputGroup>
-              <Input placeholder={'Repita sua senha'} type={'password'} />
+              <Input
+                variant={'filled'}
+                placeholder={'Repita sua senha'}
+                type={'password'}
+                name={'repeat-password'}
+              />
               <InputRightElement>
-                <Lock color={'gray'} />
+                <LockKeyhole color={'gray'} />
               </InputRightElement>
             </InputGroup>
           </VStack>
@@ -55,7 +69,7 @@ export function Register() {
             align={'center'}
             textAlign={'center'}
           >
-            <Checkbox>Lembre-se de Mim</Checkbox>
+            <Checkbox name={'remember-me'}>Lembre-se de Mim</Checkbox>
             <Link color={'blue'}>Recuperar Senha</Link>
           </Flex>
           <Button

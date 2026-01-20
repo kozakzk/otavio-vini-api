@@ -24,19 +24,28 @@ export function Login() {
         height={'100svh'}
         padding={{ base: '2em', md: '0' }}
       >
-        <VStack spacing={10}>
+        <VStack spacing={10} width={'30svw'}>
           <Text fontSize={'5xl'} color={'gray.600'} align={'center'}>
             Bem-vindo de Volta!
           </Text>
           <VStack spacing={2} width={'100%'}>
             <InputGroup>
-              <Input placeholder={'Email'} type={'email'} />
+              <Input
+                placeholder={'Email'}
+                type={'email'}
+                name={'email'}
+                autoComplete={'email'}
+              />
               <InputRightElement>
                 <AtSign color={'gray'} />
               </InputRightElement>
             </InputGroup>
             <InputGroup>
-              <Input placeholder={'Senha'} type={'password'} />
+              <Input
+                placeholder={'Senha'}
+                type={'password'}
+                name={'password'}
+              />
               <InputRightElement>
                 <Lock color={'gray'} />
               </InputRightElement>
@@ -49,7 +58,7 @@ export function Login() {
             align={'center'}
             textAlign={'center'}
           >
-            <Checkbox>Lembre-se de Mim</Checkbox>
+            <Checkbox name={'remember-me'}>Lembre-se de Mim</Checkbox>
             <Link color={'blue'}>Recuperar Senha</Link>
           </Flex>
           <Button

@@ -32,6 +32,8 @@ export function ElectronicsList() {
             border={1}
             margin={'1em'}
             padding={'1em'}
+            alignItems={'center'}
+            justifyContent={'center'}
           >
             <Image
               src={electronic.imgUrl}
@@ -40,14 +42,11 @@ export function ElectronicsList() {
               width={'100%'}
             />
             <VStack height={'10rem'} overflowX={'auto'}>
-              <Text
-                fontSize={'1.2rem'}
-                fontWeight={500}
-              >
+              <Text fontSize={'1.2rem'} fontWeight={500} align={'center'}>
                 {electronic.name}
               </Text>
             </VStack>
-            <CardBody alignContent={'end'} maxH={'5rem'}>
+            <CardBody alignContent={'end'} maxH={'5rem'} width={'100%'}>
               <Text color={'blue.600'} fontSize={'2xl'}>
                 {electronic.price.toLocaleString('pt-BR', {
                   style: 'currency',

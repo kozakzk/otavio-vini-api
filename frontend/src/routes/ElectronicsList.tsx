@@ -39,11 +39,10 @@ export function ElectronicsList() {
               draggable={false}
               width={'100%'}
             />
-            <VStack height={'10rem'}>
+            <VStack height={'10rem'} overflowX={'auto'}>
               <Text
                 fontSize={'1.2rem'}
                 fontWeight={500}
-                textOverflow={'hidden'}
               >
                 {electronic.name}
               </Text>
@@ -57,7 +56,7 @@ export function ElectronicsList() {
               </Text>
               <Divider />
             </CardBody>
-            <CardFooter justifyContent={'center'}>
+            <CardFooter justifyContent={'center'} alignContent={'center'}>
               <Button colorScheme={'blue'} leftIcon={<ShoppingCart />}>
                 Comprar agora
               </Button>

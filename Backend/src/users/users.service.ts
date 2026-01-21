@@ -20,7 +20,7 @@ export class UsersService {
         return user
     }
 
-    async create() {
+    async create(user: { email: string, password: string }) {
         
     }
 

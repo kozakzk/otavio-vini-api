@@ -10,9 +10,32 @@ import {
   VStack,
 } from '@chakra-ui/react';
 import { ShoppingCart } from 'lucide-react';
-import mockedElectronicsList from '../mocks/electronics-list.mock.json';
+import { useEffect, useState } from 'react';
+// import mockedElectronicsList from '../mocks/electronics-list.mock.json';
+
+type ElectronicProduct = {
+  id: number;
+  name: string;
+  description: string;
+  price: number;
+  imgUrl: string;
+};
 
 export function ElectronicsList() {
+  const [products, setProducts] = useState<ElectronicProduct[]>([]);
+
+  useEffect(() => {
+    async function fetchProducts() {
+      const response = await fetch(
+        `${import.meta.env.VITE_BACKEND_URL}/products`,
+      );
+      const products: ElectronicProduct[] = await response.json();
+
+      setProducts(products);
+    }
+    fetchProducts();
+  });
+
   return (
     <>
       <Text textAlign={'center'} color={'blue.600'} fontSize={'3rem'}>
@@ -23,7 +46,7 @@ export function ElectronicsList() {
         justifyContent={'space-evenly'}
         alignItems={'center'}
       >
-        {mockedElectronicsList.map((electronic) => (
+        {products.map((electronic) => (
           <Card
             maxW={'sm'}
             width={'50rem'}
@@ -45,6 +68,7 @@ export function ElectronicsList() {
               <Text fontSize={'1.2rem'} fontWeight={500} align={'center'}>
                 {electronic.name}
               </Text>
+              <Text>{electronic.description}</Text>
             </VStack>
             <CardBody alignContent={'end'} maxH={'5rem'} width={'100%'}>
               <Text color={'blue.600'} fontSize={'2xl'}>

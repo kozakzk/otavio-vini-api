@@ -35,7 +35,7 @@ export function Register() {
 
   return (
     <>
-      <ErrorBoundary fallback={<p>Falha ao carregar os dados</p>}>
+      <ErrorBoundary fallback={<p>Falha ao cadastrar.</p>}>
         <Flex
           justifyContent={'center'}
           alignItems={'center'}
@@ -54,6 +54,7 @@ export function Register() {
                     type={'email'}
                     name={'email'}
                     autoComplete={'email'}
+                    required
                   />
                   <InputRightElement>
                     <AtSign color={'gray'} />
@@ -64,6 +65,7 @@ export function Register() {
                     placeholder={'Senha'}
                     type={'password'}
                     name={'password'}
+                    required
                   />
                   <InputRightElement>
                     <Lock color={'gray'} />
@@ -75,6 +77,7 @@ export function Register() {
                     placeholder={'Repita sua senha'}
                     type={'password'}
                     name={'repeat-password'}
+                    required
                   />
                   <InputRightElement>
                     <LockKeyhole color={'gray'} />

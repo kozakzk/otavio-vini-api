@@ -9,14 +9,20 @@ export class UsersService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(data: CreateUserDto) {
-    //criptografar e substituir original pelo hash
-
     
-    return this.prisma.user.create({data});
+    const hashedPassword = await bcrypt.hash(data.password, 10);
+
+    return this.prisma.user.create({data
+:       {...data, password: hashedPassword}
+    });
   }
-    //adicionar método para o login (finByEmail(email: string))
 
-
+  async findByEmail(email: string){
+    return this.prisma.user.findUnique({where: { 
+      email: email, 
+    }
+  });
+ }
 
   async findAll() {
     return this.prisma.user.findMany();

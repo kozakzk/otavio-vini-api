@@ -4,7 +4,6 @@ import { AppModule } from './app.module';
 import { apiReference } from '@scalar/nestjs-api-reference';
 import { ValidationPipe } from '@nestjs/common';
 
-
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.enableCors();
@@ -21,14 +20,14 @@ async function bootstrap() {
 
   app.use('/reference', apiReference({ content: documentFactory }));
 
-  app.useGlobalPipes(new ValidationPipe({
-    whitelist: true, 
-    forbidNonWhitelisted: true, 
-    transform: true, 
-  }));
-
+  app.useGlobalPipes(
+    new ValidationPipe({
+      whitelist: true,
+      forbidNonWhitelisted: true,
+      transform: true,
+    }),
+  );
 
   await app.listen(process.env.PORT ?? 3000);
-
 }
 bootstrap();

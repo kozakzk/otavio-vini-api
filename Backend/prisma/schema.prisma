@@ -1,23 +1,21 @@
 generator client {
-  provider = "prisma-client-js" 
+  provider = "prisma-client-js"
 }
-
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-
 model User {
-  id        String   @id @default(uuid()) 
-  email     String   @unique
-  password  String
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+  role     String
 }
 
-
 model Product {
-  id          String   @id @default(uuid()) 
+  id          String @id @default(uuid())
   name        String
   description String
   price       Float

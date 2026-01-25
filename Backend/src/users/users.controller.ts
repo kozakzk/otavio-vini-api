@@ -34,7 +34,7 @@ export class UsersController {
   @UseGuards()
   @UseGuards(AuthGuard('jwt'))
   @Roles(Role.Admin, Role.User)
-  findOne(@Param('id') { id }: { id: string }) {
+  findOne(@Param('id') id: string) {
     return this.usersService.findOne(id);
   }
 

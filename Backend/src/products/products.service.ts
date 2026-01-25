@@ -1,4 +1,4 @@
-import { NotFoundException, Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
 import { CreateProductDto } from './dto/create-product.dto';
 
@@ -7,11 +7,7 @@ export class ProductsService {
   constructor(private readonly prisma: PrismaService) {}
 
   async findAll() {
-    return this.prisma.product.findMany();
-  }
-
-  async create(data: CreateProductDto) {
-    return this.prisma.product.create({ data });
+    return await this.prisma.product.findMany();
   }
 
   async findOne(id: string) {
@@ -22,6 +18,10 @@ export class ProductsService {
     }
 
     return product;
+  }
+
+  async create(data: CreateProductDto) {
+    return await this.prisma.product.create({ data });
   }
 
   async remove(id: string) {

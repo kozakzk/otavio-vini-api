@@ -29,6 +29,7 @@ export class UsersService {
 
     return await this.prisma.user.create({
       data: { ...data, password: hashedPassword },
+      omit: { password: true },
     });
   }
 

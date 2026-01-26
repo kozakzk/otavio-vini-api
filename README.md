@@ -28,12 +28,14 @@ O projeto é dividido em Front-end e Back-end, seguindo boas práticas de arquit
 
 O Back-end segue a arquitetura padrão do NestJS, organizada por recursos (resources):
 
+```
 src/
 ├── auth/
 ├── users/
 ├── products/
 ├── prisma/
 └── main.ts
+```
 
 ### 📦 Resources disponíveis
 
@@ -76,23 +78,23 @@ Antes de começar, certifique-se de ter instalado:
 ### 🔹 Back-end
 
 Instalar dependências:
-npm install
+`npm install`
 
 Rodar as migrations:
-npx prisma migrate dev
+`npx prisma migrate dev`
 
 Iniciar o servidor:
-npm run start:dev
+`npm run start:dev`
 
 ---
 
 ### 🔹 Front-end
 
 Instalar dependências:
-npm install
+`npm install`
 
 Iniciar aplicação:
-npm start
+`npm start`
 
 ---
 

@@ -18,24 +18,24 @@ import { Link as RouterLink, useNavigate } from 'react-router';
 import { apiRequest } from '../services/api';
 
 export function Login() {
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const toast = useToast();
-  const [isLoading, setIsLoading] = useState(false); 
+  const [isLoading, setIsLoading] = useState(false);
 
   async function handleUserLogin(formData: FormData) {
-    setIsLoading(true); 
+    setIsLoading(true);
 
     const user = {
-      password: formData.get('password'),
-      email: formData.get('email'),
+      password: formData.get('password') as string,
+      email: formData.get('email') as string,
     };
 
     try {
       const data = await apiRequest('/auth/login', 'POST', user);
-      
+
       if (data.access_token) {
         localStorage.setItem('auth_token', data.access_token);
-        
+
         toast({
           title: 'Login realizado!',
           description: 'Redirecionando...',
@@ -44,7 +44,7 @@ export function Login() {
           isClosable: true,
         });
 
-        navigate('/list'); 
+        navigate('/list');
       }
     } catch (error) {
       toast({
@@ -56,9 +56,9 @@ export function Login() {
       });
       console.error(error);
     } finally {
-      setIsLoading(false); 
+      setIsLoading(false);
     }
-}
+  }
 
   return (
     <>

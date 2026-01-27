@@ -9,30 +9,56 @@ import {
   Link,
   Text,
   VStack,
+  useToast,
 } from '@chakra-ui/react';
 import { AtSign, Lock } from 'lucide-react';
+import { useState } from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Link as RouterLink } from 'react-router';
+import { Link as RouterLink, useNavigate } from 'react-router';
+import { apiRequest } from '../services/api';
 
 export function Login() {
+  const navigate = useNavigate(); 
+  const toast = useToast();
+  const [isLoading, setIsLoading] = useState(false); 
+
   async function handleUserLogin(formData: FormData) {
+    setIsLoading(true); 
+
     const user = {
       password: formData.get('password'),
       email: formData.get('email'),
     };
 
-    const response = await fetch(
-      `${import.meta.env.VITE_BACKEND_URL}/auth/login`,
-      {
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        method: 'POST',
-        body: JSON.stringify(user),
-      },
-    );
-    console.log((await response.json()).access_token);
-  }
+    try {
+      const data = await apiRequest('/auth/login', 'POST', user);
+      
+      if (data.access_token) {
+        localStorage.setItem('auth_token', data.access_token);
+        
+        toast({
+          title: 'Login realizado!',
+          description: 'Redirecionando...',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+
+        navigate('/list'); 
+      }
+    } catch (error) {
+      toast({
+        title: 'Falha no login',
+        description: 'Verifique seu email e senha.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      console.error(error);
+    } finally {
+      setIsLoading(false); 
+    }
+}
 
   return (
     <>
@@ -43,7 +69,7 @@ export function Login() {
           height={'100svh'}
           padding={{ base: '2em', md: '0' }}
         >
-          <form>
+          <form action={handleUserLogin}>
             <VStack spacing={10} width={'30svw'}>
               <Text fontSize={'5xl'} color={'gray.600'} align={'center'}>
                 Bem-vindo de Volta!
@@ -86,8 +112,9 @@ export function Login() {
               <Button
                 colorScheme={'blue'}
                 width={'100%'}
-                formAction={handleUserLogin}
                 type={'submit'}
+                isLoading={isLoading}
+                loadingText="Entrando..."
               >
                 Login
               </Button>

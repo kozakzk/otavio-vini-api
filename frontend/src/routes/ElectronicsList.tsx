@@ -19,7 +19,7 @@ type ElectronicProduct = {
   name: string;
   description: string;
   price: number;
-  imgUrl: string;
+  imageUrl: string;
 };
 
 export function ElectronicsList() {
@@ -45,7 +45,11 @@ export function ElectronicsList() {
       navigate('/login');
     };
 
-    return <Button onClick={handleLogout}>Sair</Button>;
+    return (
+      <Button colorScheme={'blue'} onClick={handleLogout}>
+        Sair
+      </Button>
+    );
   }
 
   return (
@@ -73,10 +77,11 @@ export function ElectronicsList() {
             justifyContent={'center'}
           >
             <Image
-              src={electronic.imgUrl}
+              src={electronic.imageUrl}
               alt={electronic.name}
               draggable={false}
               width={'100%'}
+              height={'40%'}
             />
             <VStack height={'10rem'} overflowX={'auto'}>
               <Text fontSize={'1.2rem'} fontWeight={500} align={'center'}>

@@ -13,6 +13,7 @@ import { ShoppingCart } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { PrivateRoute } from '../components/PrivateRoute';
 import { useNavigate } from 'react-router';
+import { useToast } from '@chakra-ui/react';
 
 type ElectronicProduct = {
   id: number;
@@ -24,12 +25,29 @@ type ElectronicProduct = {
 
 export function ElectronicsList() {
   const [products, setProducts] = useState<ElectronicProduct[]>([]);
+  const navigate = useNavigate();
+  const toast = useToast();
 
   useEffect(() => {
     async function fetchProducts() {
       const response = await fetch(
         `${import.meta.env.VITE_BACKEND_URL}/products`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('auth_token')}`,
+          },
+        },
       );
+      if (!response.ok) {
+        navigate('/login');
+        toast({
+          title: 'Token incorreto ou expirado!',
+          description: 'Redirecionando...',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
       const products: ElectronicProduct[] = await response.json();
 
       setProducts(products);

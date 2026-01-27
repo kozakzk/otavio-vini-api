@@ -10,9 +10,6 @@ import { Roles } from 'src/auth/decorators/roles.decorator';
 export class ProductsController {
   constructor(private readonly productsService: ProductsService) {}
 
-  @UseGuards()
-  @UseGuards(AuthGuard('jwt'))
-  @Roles(Role.Admin, Role.User)
   @Get()
   findAll() {
     return this.productsService.findAll();

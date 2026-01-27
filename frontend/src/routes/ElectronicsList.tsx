@@ -12,6 +12,7 @@ import {
 import { ShoppingCart } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { PrivateRoute } from '../components/PrivateRoute';
+import { useNavigate } from 'react-router';
 
 type ElectronicProduct = {
   id: number;
@@ -36,12 +37,24 @@ export function ElectronicsList() {
     fetchProducts();
   });
 
+  function Logout() {
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+      localStorage.removeItem('auth_token');
+      navigate('/login');
+    };
+
+    return <Button onClick={handleLogout}>Sair</Button>;
+  }
+
   return (
     <>
       <PrivateRoute to="/list" />
       <Text textAlign={'center'} color={'blue.600'} fontSize={'3rem'}>
         Lista de produtos
       </Text>
+      <Logout />
       <Flex
         flexDirection={{ base: 'column', md: 'row' }}
         justifyContent={'space-evenly'}

@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { ShoppingCart } from 'lucide-react';
 import { useEffect, useState } from 'react';
-// import mockedElectronicsList from '../mocks/electronics-list.mock.json';
+import { PrivateRoute } from '../components/PrivateRoute';
 
 type ElectronicProduct = {
   id: number;
@@ -23,7 +23,6 @@ type ElectronicProduct = {
 
 export function ElectronicsList() {
   const [products, setProducts] = useState<ElectronicProduct[]>([]);
-
   useEffect(() => {
     async function fetchProducts() {
       const response = await fetch(
@@ -38,6 +37,7 @@ export function ElectronicsList() {
 
   return (
     <>
+      <PrivateRoute to="/list" />
       <Text textAlign={'center'} color={'blue.600'} fontSize={'3rem'}>
         Lista de produtos
       </Text>

@@ -18,6 +18,7 @@ CREATE TABLE "Product" (
     "description" TEXT NOT NULL,
     "price" DOUBLE PRECISION NOT NULL,
     "imageUrl" TEXT NOT NULL,
+    "category" TEXT,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
